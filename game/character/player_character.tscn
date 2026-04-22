@@ -1,0 +1,84 @@
+[gd_scene format=3 uid="uid://djr7txtv4mj7p"]
+
+[ext_resource type="Script" uid="uid://bb1q4wrgtamko" path="res://character/player_character.gd" id="1_ry0v3"]
+[ext_resource type="Shader" uid="uid://ug721l7pjvx1" path="res://prototype/sprite_colorizer.gdshader" id="2_pflqk"]
+[ext_resource type="Texture2D" uid="uid://cwjnn6awhtbjj" path="res://prototype/textures/alien-bug.png" id="2_vp0oj"]
+[ext_resource type="Texture2D" uid="uid://whhd044hsq2y" path="res://prototype/textures/alien-stare.png" id="4_b1uet"]
+[ext_resource type="Texture2D" uid="uid://dm0766qn8s4hm" path="res://prototype/textures/astronaut-helmet.png" id="5_pjn5c"]
+[ext_resource type="Texture2D" uid="uid://c7un4cvrrdgwn" path="res://prototype/textures/cyborg-face.png" id="6_gv10s"]
+[ext_resource type="Texture2D" uid="uid://c5fkrwv2fyrol" path="res://prototype/textures/vintage-robot.png" id="7_fbroj"]
+[ext_resource type="Script" uid="uid://bbcatoc1vha8f" path="res://core/player_controller.gd" id="9_7ar1o"]
+
+[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_scs6h"]
+properties/0/path = NodePath("Sprite:animation")
+properties/0/spawn = true
+properties/0/replication_mode = 2
+properties/1/path = NodePath(".:server_position")
+properties/1/spawn = true
+properties/1/replication_mode = 1
+properties/2/path = NodePath("PlayerController:move")
+properties/2/spawn = true
+properties/2/replication_mode = 1
+properties/3/path = NodePath("PlayerController:cycle_sprite")
+properties/3/spawn = true
+properties/3/replication_mode = 1
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_vp0oj"]
+radius = 65.00769
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_fbroj"]
+shader = ExtResource("2_pflqk")
+shader_parameter/color_1 = Color(1, 1, 1, 1)
+shader_parameter/color_2 = Color(0, 0, 0, 1)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pjn5c"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_vp0oj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_b1uet")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pjn5c")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_gv10s")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_fbroj")
+}],
+"loop": false,
+"name": &"default",
+"speed": 5.0
+}]
+
+[node name="PlayerCharacter" type="CharacterBody2D" unique_id=869717009]
+script = ExtResource("1_ry0v3")
+default_speed_pixels_per_seconds = 500
+mass = 0.1
+
+[node name="PlayerController" type="Node" parent="." unique_id=1409235584]
+script = ExtResource("9_7ar1o")
+metadata/_custom_type_script = "uid://bbcatoc1vha8f"
+
+[node name="Synchronizer" type="MultiplayerSynchronizer" parent="." unique_id=2080439021]
+replication_config = SubResource("SceneReplicationConfig_scs6h")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=207583134]
+shape = SubResource("CircleShape2D_vp0oj")
+
+[node name="Sprite" type="AnimatedSprite2D" parent="." unique_id=680492809]
+material = SubResource("ShaderMaterial_fbroj")
+sprite_frames = SubResource("SpriteFrames_pjn5c")
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=1336832277]
+
+[node name="Label" type="Label" parent="." unique_id=1641714925]
+offset_left = -200.0
+offset_top = -98.0
+offset_right = 200.0
+offset_bottom = -75.0
+horizontal_alignment = 1
+vertical_alignment = 1

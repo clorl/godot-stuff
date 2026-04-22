@@ -1,0 +1,16 @@
+[gd_scene format=3 uid="uid://8yfq3vrysgju"]
+
+[ext_resource type="Script" uid="uid://bs30gahrncnt7" path="res://core/debug.gd" id="1_dgb3q"]
+
+[node name="Debug" type="Node" unique_id=814477241]
+script = ExtResource("1_dgb3q")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=887535015]
+
+[node name="Container" type="VBoxContainer" parent="CanvasLayer" unique_id=574900949]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2

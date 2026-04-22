@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://buaq673iyr04d"]
+
+[ext_resource type="Script" uid="uid://d4bxyuqas3wu4" path="res://network/players_spawner.gd" id="1_ig7tw"]
+[ext_resource type="Shader" uid="uid://ulngh2ungva8" path="res://prototype/grid.gdshader" id="2_0xm2m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
+shader = ExtResource("2_0xm2m")
+shader_parameter/base = 3.0
+shader_parameter/color_bg = Color(0.7, 0.7, 0.5, 1)
+shader_parameter/color_grid_1 = Color(1, 1, 1, 1)
+shader_parameter/color_grid_2 = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/floor_grid = false
+shader_parameter/grid_size = 10.0
+shader_parameter/grid_1_step = 5.0
+shader_parameter/grid_2_step = 2.0
+shader_parameter/line_width = 6.0
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_rotation = 0.0
+shader_parameter/uv_scale = 8.0
+
+[node name="Main" type="Node2D" unique_id=43698321]
+
+[node name="Players" type="MultiplayerSpawner" parent="." unique_id=1547555004]
+_spawnable_scenes = PackedStringArray("uid://djr7txtv4mj7p")
+spawn_path = NodePath(".")
+script = ExtResource("1_ig7tw")
+
+[node name="Sprite2D" type="ColorRect" parent="." unique_id=1968538245]
+material = SubResource("ShaderMaterial_0xm2m")
+offset_left = -1210.0
+offset_top = -299.0
+offset_right = 1241.0
+offset_bottom = 291.0
