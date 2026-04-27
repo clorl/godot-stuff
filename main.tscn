@@ -1,0 +1,46 @@
+[gd_scene format=3 uid="uid://buaq673iyr04d"]
+
+[ext_resource type="Script" uid="uid://d4bxyuqas3wu4" path="res://network/players_spawner.gd" id="1_ig7tw"]
+[ext_resource type="Shader" uid="uid://ulngh2ungva8" path="res://prototype/grid.gdshader" id="2_0xm2m"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
+shader = ExtResource("2_0xm2m")
+shader_parameter/base = 2.0
+shader_parameter/color_bg = Color(0.63288, 0.5616, 0.72, 1)
+shader_parameter/color_grid_1 = Color(0.117260754, 0.08673177, 0.13252522, 1)
+shader_parameter/color_grid_2 = Color(0.021434635, 0.021434637, 0.021434627, 1)
+shader_parameter/floor_grid = false
+shader_parameter/grid_size = 6.0
+shader_parameter/grid_1_step = 0.033
+shader_parameter/grid_2_step = 2.0
+shader_parameter/line_width = 2.0
+shader_parameter/uv_offset = Vector2(0, 0)
+shader_parameter/uv_rotation = 0.0
+shader_parameter/uv_scale = 1.0
+
+[sub_resource type="Curve2D" id="Curve2D_0xm2m"]
+_data = {
+"points": PackedVector2Array(0, 0, 0, 0, -207, -204, 0, 0, 0, 0, 201, -206, 0, 0, 0, 0, 192, 178, 0, 0, 0, 0, -197, 195)
+}
+point_count = 4
+
+[node name="Main" type="Node2D" unique_id=43698321]
+
+[node name="Grid" type="ColorRect" parent="." unique_id=1968538245]
+material = SubResource("ShaderMaterial_0xm2m")
+offset_left = -1500.0
+offset_top = -1500.0
+offset_right = 1500.0
+offset_bottom = 1500.0
+metadata/_edit_lock_ = true
+
+[node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1553503622]
+_spawnable_scenes = PackedStringArray("uid://djr7txtv4mj7p")
+spawn_path = NodePath(".")
+script = ExtResource("1_ig7tw")
+spawn_data = Dictionary[String, Variant]({
+"spawn_points": SubResource("Curve2D_0xm2m")
+})
+
+[node name="SpawnPositions" type="Path2D" parent="PlayerSpawner" unique_id=915555506]
+curve = SubResource("Curve2D_0xm2m")
