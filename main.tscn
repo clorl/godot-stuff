@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://buaq673iyr04d"]
 
-[ext_resource type="Script" uid="uid://d4bxyuqas3wu4" path="res://network/players_spawner.gd" id="1_ig7tw"]
+[ext_resource type="Script" uid="uid://d4bxyuqas3wu4" path="res://core/network/players_spawner.gd" id="1_ig7tw"]
 [ext_resource type="Shader" uid="uid://ulngh2ungva8" path="res://prototype/grid.gdshader" id="2_0xm2m"]
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]

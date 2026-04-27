@@ -1,0 +1,6 @@
+[gd_scene format=3 uid="uid://c7rgq3128wc7k"]
+
+[ext_resource type="Script" uid="uid://btub8381eruly" path="res://tactical_rpg/player_controller.gd" id="1_lleto"]
+
+[node name="PlayerController" type="Node" unique_id=649808320]
+script = ExtResource("1_lleto")

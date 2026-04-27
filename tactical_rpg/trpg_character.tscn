@@ -15,6 +15,12 @@ shader = ExtResource("1_y4bl5")
 shader_parameter/outline_color = Color(1, 0.6, 0, 1)
 shader_parameter/outline_width_px = 2.0
 
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_nsdc0"]
+render_priority = 1
+shader = ExtResource("1_y4bl5")
+shader_parameter/outline_color = Color(0.21634744, 0.3807689, 0.64468336, 1)
+shader_parameter/outline_width_px = 2.0
+
 [node name="Character" type="Area3D" unique_id=1421198854]
 script = ExtResource("1_frpm7")
 
@@ -35,5 +41,7 @@ script = ExtResource("2_73kav")
 material = SubResource("ShaderMaterial_73kav")
 targets = [NodePath("../../MeshInstance3D")]
 
-[connection signal="mouse_entered" from="." to="." method="_mouse_entered"]
-[connection signal="mouse_exited" from="." to="." method="_mouse_exited"]
+[node name="SelectOutline" type="Node3D" parent="." unique_id=2078939880 node_paths=PackedStringArray("targets")]
+script = ExtResource("2_73kav")
+material = SubResource("ShaderMaterial_nsdc0")
+targets = [NodePath("../MeshInstance3D")]

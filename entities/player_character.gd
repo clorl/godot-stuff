@@ -7,7 +7,7 @@ extends CharacterBody2D
 # Called on all peers after _ready
 func _spawn(opts: Dictionary):
 	if not controller:
-		controller = get_node("PlayerController")
+		controller = $Input
 	assert(controller)
 	controller.set_multiplayer_authority(opts.peer_id)
 
@@ -36,16 +36,16 @@ func _spawn(opts: Dictionary):
 
 func _physics_process(_dt):
 	if multiplayer.is_server():
-		velocity = controller.move.normalized() * 100.0
+		velocity = controller.move_input.normalized() * 100.0
 	else:
-		velocity = controller.move.normalized() * randf_range(0.1, 3) * 100.0
+		velocity = controller.move_input.normalized() * randf_range(0.1, 3) * 100.0
 	move_and_slide()
 	queue_redraw()
 	if multiplayer.is_server():
 		_server_position = global_position
 
 func _draw():
-	draw_line(Vector2(0,0), controller.move * 200.0, Color.GREEN if controller.is_multiplayer_authority() else Color.RED, 5.0)
+	draw_line(Vector2(0,0), controller.move_input * 200.0, Color.GREEN if controller.is_multiplayer_authority() else Color.RED, 5.0)
 	draw_circle(to_local(_server_position), 64, Color.GREEN, false, 10)
 
 @rpc("authority", "call_local", "reliable")

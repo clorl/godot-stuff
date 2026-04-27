@@ -1,18 +1,13 @@
 [gd_scene format=3 uid="uid://djr7txtv4mj7p"]
 
-[ext_resource type="Script" uid="uid://bb1q4wrgtamko" path="res://character/player_character.gd" id="1_ry0v3"]
+[ext_resource type="Script" uid="uid://bb1q4wrgtamko" path="res://entities/player_character.gd" id="1_ry0v3"]
 [ext_resource type="Texture2D" uid="uid://cwjnn6awhtbjj" path="res://prototype/textures/alien-bug.png" id="2_vp0oj"]
 [ext_resource type="Shader" uid="uid://ug721l7pjvx1" path="res://prototype/sprite_colorizer.gdshader" id="3_ry0v3"]
 [ext_resource type="Texture2D" uid="uid://whhd044hsq2y" path="res://prototype/textures/alien-stare.png" id="4_b1uet"]
 [ext_resource type="Texture2D" uid="uid://dm0766qn8s4hm" path="res://prototype/textures/astronaut-helmet.png" id="5_pjn5c"]
 [ext_resource type="Texture2D" uid="uid://c7un4cvrrdgwn" path="res://prototype/textures/cyborg-face.png" id="6_gv10s"]
 [ext_resource type="Texture2D" uid="uid://c5fkrwv2fyrol" path="res://prototype/textures/vintage-robot.png" id="7_fbroj"]
-[ext_resource type="Script" uid="uid://bbcatoc1vha8f" path="res://core/player_controller.gd" id="9_7ar1o"]
-
-[sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_ry0v3"]
-properties/0/path = NodePath(".:move")
-properties/0/spawn = true
-properties/0/replication_mode = 1
+[ext_resource type="Script" uid="uid://yjb13a7vpor8" path="res://core/input/input.gd" id="8_pxohg"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_vp0oj"]
 radius = 65.00769
@@ -53,11 +48,6 @@ properties/0/replication_mode = 1
 [node name="PlayerCharacter" type="CharacterBody2D" unique_id=869717009]
 script = ExtResource("1_ry0v3")
 
-[node name="PlayerController" type="MultiplayerSynchronizer" parent="." unique_id=1450979959]
-root_path = NodePath(".")
-replication_config = SubResource("SceneReplicationConfig_ry0v3")
-script = ExtResource("9_7ar1o")
-
 [node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=207583134]
 shape = SubResource("CircleShape2D_vp0oj")
 
@@ -83,3 +73,6 @@ replication_config = SubResource("SceneReplicationConfig_fbroj")
 [node name="Timer" type="Timer" parent="." unique_id=1666190781]
 autostart = true
 ignore_time_scale = true
+
+[node name="Input" type="Node" parent="." unique_id=208387342]
+script = ExtResource("8_pxohg")
