@@ -1,6 +1,6 @@
 [gd_scene format=3 uid="uid://c4duqsn03akh5"]
 
-[ext_resource type="Script" uid="uid://bad8mrt5se4uk" path="res://tactical_rpg/trpg_character.gd" id="1_frpm7"]
+[ext_resource type="Script" uid="uid://bad8mrt5se4uk" path="res://tactical_rpg/character/trpg_character.gd" id="1_frpm7"]
 [ext_resource type="Shader" uid="uid://b6axbqnb7q1d4" path="res://tactical_rpg/interact/outline.gdshader" id="1_y4bl5"]
 [ext_resource type="Script" uid="uid://t8n0w6kxynk8" path="res://tactical_rpg/outline_visuals.gd" id="2_73kav"]
 [ext_resource type="Script" uid="uid://bu1sui3cw3io6" path="res://tactical_rpg/interact/interactable.gd" id="4_nsdc0"]
