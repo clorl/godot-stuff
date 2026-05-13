@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://62vfma3dfdoc"]
+
+[ext_resource type="Script" uid="uid://b4s2jbky4u58k" path="res://character/ability_data.gd" id="1_b6ean"]
+[ext_resource type="Script" uid="uid://c2q3017bult3r" path="res://item/item_data.gd" id="2_vjsrb"]
+[ext_resource type="Script" uid="uid://clsgej8m41el5" path="res://character/character.gd" id="3_eof2p"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_b6ean"]
+load_path = "res://.godot/imported/placeholder_portraits.jpeg-4b4375c88fdfacf15dac6cc70c8ca20d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vjsrb"]
+atlas = SubResource("CompressedTexture2D_b6ean")
+region = Rect2(631, 1321, 210, 330)
+
+[resource]
+script = ExtResource("3_eof2p")
+name = "Bob"
+portrait = SubResource("AtlasTexture_vjsrb")
+health = 200
+speed = 8.0
+metadata/_custom_type_script = "uid://clsgej8m41el5"

@@ -1,0 +1,29 @@
+[gd_scene format=3 uid="uid://dc0qixn6g4g8e"]
+
+[ext_resource type="Script" uid="uid://ck6exqbf2jg3e" path="res://entities/entity_3d.gd" id="1_jsnik"]
+[ext_resource type="Script" uid="uid://l1s8bda3pejv" path="res://core/utility/interaction_area.gd" id="2_v7c2q"]
+[ext_resource type="Script" uid="uid://b7nfn42da2x8e" path="res://entities/visuals_manager.gd" id="2_xcql3"]
+[ext_resource type="Script" uid="uid://bnabdpfcghn0y" path="res://visuals/outline.gd" id="3_lkcmr"]
+[ext_resource type="Shader" uid="uid://chx26juofbmx" path="res://visuals/outline.gdshader" id="4_mqrt3"]
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqrt3"]
+render_priority = 0
+shader = ExtResource("4_mqrt3")
+shader_parameter/outline_color = Color(1, 0, 0.9716425, 1)
+shader_parameter/outline_width_px = 2.0
+shader_parameter/visible = true
+
+[node name="Entity3D" type="Node3D" unique_id=1295524432]
+script = ExtResource("1_jsnik")
+
+[node name="SelectionArea" type="Area3D" parent="." unique_id=697976714]
+script = ExtResource("2_v7c2q")
+
+[node name="VisualsManager" type="Node3D" parent="." unique_id=1843374448]
+script = ExtResource("2_xcql3")
+
+[node name="Outline" type="Node3D" parent="." unique_id=230409296]
+script = ExtResource("3_lkcmr")
+shader = SubResource("ShaderMaterial_mqrt3")
+color = Color(1, 0, 0.9201813, 1)
+thickness = 2.0

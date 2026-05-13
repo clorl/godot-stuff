@@ -1,0 +1,146 @@
+[gd_scene format=3 uid="uid://djatjn0dr35pq"]
+
+[ext_resource type="Script" uid="uid://d36hn8rlrqajf" path="res://character/character_entity.gd" id="1_o6jyn"]
+[ext_resource type="PackedScene" uid="uid://b4gtyjegp6228" path="res://character/ual/AnimationLibrary_Godot_Standard.glb" id="1_yf0e5"]
+[ext_resource type="Script" uid="uid://bnabdpfcghn0y" path="res://visuals/outline.gd" id="2_1l1n4"]
+[ext_resource type="Shader" uid="uid://chx26juofbmx" path="res://visuals/outline.gdshader" id="3_ugqs2"]
+[ext_resource type="Script" uid="uid://l1s8bda3pejv" path="res://core/utility/interaction_area.gd" id="4_0rvpn"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_1l1n4"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ugqs2"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ugqs2"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_1l1n4")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_ugqs2")
+blend_point_1/pos = 0.0
+sync = true
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_yf0e5"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_yf0e5"]
+states/Start/position = Vector2(123, 100)
+states/Walk/node = SubResource("AnimationNodeBlendSpace1D_ugqs2")
+states/Walk/position = Vector2(353.5, 100)
+transitions = ["Start", "Walk", SubResource("AnimationNodeStateMachineTransition_yf0e5")]
+graph_offset = Vector2(-175.13513, -66.274506)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_0rvpn"]
+render_priority = 0
+shader = ExtResource("3_ugqs2")
+shader_parameter/outline_color = Color(1, 0.43237156, 0, 1)
+shader_parameter/outline_width_px = 1.5
+shader_parameter/visible = true
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_yf0e5"]
+radius = 0.7952286
+
+[sub_resource type="GDScript" id="GDScript_0rvpn"]
+script/source = "extends Node
+
+@export var bindings: Array[NodeBinding]
+
+func update():
+	pass
+"
+
+[sub_resource type="GDScript" id="GDScript_o6jyn"]
+script/source = "class_name NodeBinding extends Resource
+@export_custom(PROPERTY_HINT_EXPRESSION, \"\") var expr: String
+"
+
+[node name="Character" type="Node3D" unique_id=1339505195 groups=["party"]]
+script = ExtResource("1_o6jyn")
+
+[node name="AnimationTree" type="AnimationTree" parent="." unique_id=1114289762]
+root_node = NodePath("../Mannequin")
+tree_root = SubResource("AnimationNodeStateMachine_yf0e5")
+anim_player = NodePath("../Mannequin/AnimationPlayer")
+parameters/Walk/blend_position = -0.035971224
+
+[node name="Mannequin" parent="." unique_id=517317270 instance=ExtResource("1_yf0e5")]
+
+[node name="GeneralSkeleton" parent="Mannequin/Rig" parent_id_path=PackedInt32Array(517317270, 778923606) index="0" unique_id=1631222840]
+bones/1/position = Vector3(-0.0021825572, 0.87609076, -0.08650864)
+bones/1/rotation = Quaternion(-0.047067937, -0.115884125, -0.0054976926, 0.9921317)
+bones/3/rotation = Quaternion(0.044707455, 0.000107706226, 0.0001309046, 0.99900013)
+bones/4/rotation = Quaternion(0.13373965, 0.00032228127, 0.00039168025, 0.9910164)
+bones/5/rotation = Quaternion(-0.08930857, -0.00021521354, -0.00026153456, 0.99600405)
+bones/6/rotation = Quaternion(0.077354655, 0.09566738, 0.0085870335, 0.9923661)
+bones/7/rotation = Quaternion(0.48815894, 0.5263868, 0.52659327, -0.45532122)
+bones/8/rotation = Quaternion(-0.06145716, 0.8177979, -0.57213086, 0.009799533)
+bones/9/rotation = Quaternion(0.18760942, -0.652117, 0.18115696, 0.71184856)
+bones/10/rotation = Quaternion(0.09913024, 0.70686626, 0.0629003, 0.69753635)
+bones/11/rotation = Quaternion(0.6295969, -4.0978193e-08, -4.61936e-06, 0.77692205)
+bones/12/rotation = Quaternion(0.62334186, 2.9802322e-08, -4.261732e-06, 0.78194946)
+bones/13/rotation = Quaternion(0.62334144, -2.2351742e-07, -4.4703484e-06, 0.78194976)
+bones/14/rotation = Quaternion(0.6288943, -0.0297349, -4.470348e-06, 0.7769219)
+bones/15/rotation = Quaternion(0.6227327, -0.02755458, -4.410744e-06, 0.7819494)
+bones/16/rotation = Quaternion(0.6226684, -0.028961532, -4.4703493e-06, 0.78194976)
+bones/17/rotation = Quaternion(0.6630008, -0.044529784, 0.07369417, 0.7436506)
+bones/18/rotation = Quaternion(0.6203661, -0.06229401, 0.015573084, 0.7816796)
+bones/19/rotation = Quaternion(0.62192154, -0.04205184, -4.4703484e-06, 0.78194964)
+bones/20/rotation = Quaternion(0.6291978, -0.022414071, -4.202128e-06, 0.77692205)
+bones/21/rotation = Quaternion(0.6229472, -0.022176376, -4.321337e-06, 0.78194946)
+bones/22/rotation = Quaternion(0.6228982, -0.023505477, -4.5001498e-06, 0.7819497)
+bones/23/rotation = Quaternion(-0.123819165, 0.7195233, 0.2018354, 0.65285325)
+bones/24/rotation = Quaternion(0.18180694, 0.11012423, 0.060063303, 0.9753006)
+bones/25/rotation = Quaternion(0.5994299, 0.27396563, 0.19463211, 0.7264606)
+bones/26/rotation = Quaternion(0.54038626, -0.47434098, -0.4748338, -0.50746065)
+bones/27/rotation = Quaternion(0.092380926, 0.82521725, -0.55712765, -0.00954251)
+bones/28/rotation = Quaternion(0.29266158, 0.541046, -0.20420568, 0.7615238)
+bones/29/rotation = Quaternion(0.12024976, -0.69903094, -0.056890074, 0.702609)
+bones/30/rotation = Quaternion(0.6295971, 3.7252903e-08, 4.172325e-06, 0.7769218)
+bones/31/rotation = Quaternion(0.62334144, 1.825392e-07, 4.470348e-06, 0.7819497)
+bones/32/rotation = Quaternion(0.62334156, 1.00582824e-07, 4.2319293e-06, 0.78194964)
+bones/33/rotation = Quaternion(0.6288947, 0.029734796, 4.351139e-06, 0.77692175)
+bones/34/rotation = Quaternion(0.62273216, 0.027554482, 4.5001507e-06, 0.78194976)
+bones/35/rotation = Quaternion(0.62266874, 0.028961398, 4.3213377e-06, 0.78194946)
+bones/36/rotation = Quaternion(0.6630007, 0.044529956, -0.07369393, 0.7436508)
+bones/37/rotation = Quaternion(0.62036633, 0.06229363, -0.015572906, 0.7816794)
+bones/38/rotation = Quaternion(0.62192184, 0.04205143, 4.4703484e-06, 0.7819494)
+bones/39/rotation = Quaternion(0.6291981, 0.022413792, 4.11272e-06, 0.7769218)
+bones/40/rotation = Quaternion(0.62294656, 0.022176204, 4.470349e-06, 0.7819501)
+bones/41/rotation = Quaternion(0.6228987, 0.02350526, 4.1723247e-06, 0.7819493)
+bones/42/rotation = Quaternion(-0.12381923, -0.7195234, -0.2018356, 0.6528533)
+bones/43/rotation = Quaternion(0.18180703, -0.11012423, -0.060063303, 0.97530067)
+bones/44/rotation = Quaternion(0.5994302, -0.2739653, -0.19463223, 0.7264605)
+bones/45/rotation = Quaternion(-0.0008045277, 0.117348686, 0.9864068, -0.115022816)
+bones/46/rotation = Quaternion(0.015529976, 0.98327756, -0.14225136, 0.112644166)
+bones/47/rotation = Quaternion(-0.09810714, 0.73074913, -0.6754919, 0.009566687)
+bones/48/rotation = Quaternion(4.2923723e-08, 1, 5.9604645e-08, 2.568838e-08)
+bones/49/rotation = Quaternion(0.0007913576, -0.10956674, 0.98751915, 0.11313972)
+bones/50/rotation = Quaternion(-0.030968733, 0.92854536, -0.0865683, -0.35965332)
+bones/51/rotation = Quaternion(0.16945465, 0.64180255, -0.7479135, -0.00022821125)
+bones/52/rotation = Quaternion(-8.1927055e-08, 1, 2.9802322e-08, -8.602239e-09)
+
+[node name="Mannequin" parent="Mannequin/Rig/GeneralSkeleton" index="0" unique_id=259054025]
+material_overlay = SubResource("ShaderMaterial_0rvpn")
+
+[node name="InteractionArea" type="Area3D" parent="." unique_id=1367503658]
+script = ExtResource("4_0rvpn")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea" unique_id=2040307694]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_yf0e5")
+
+[node name="Outline" type="Node3D" parent="." unique_id=323238967 node_paths=PackedStringArray("targets")]
+script = ExtResource("2_1l1n4")
+shader = SubResource("ShaderMaterial_0rvpn")
+targets = [NodePath("../Mannequin/Rig/GeneralSkeleton/Mannequin")]
+color = Color(1, 0.43237156, 0, 1)
+thickness = 1.5
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." unique_id=2137983978]
+avoidance_enabled = true
+debug_enabled = true
+
+[node name="Node" type="Node" parent="." unique_id=1551647557]
+script = SubResource("GDScript_0rvpn")
+bindings = Array[SubResource("GDScript_o6jyn")]([null])
+
+[editable path="Mannequin"]

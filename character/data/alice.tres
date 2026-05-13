@@ -1,0 +1,20 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://0xgagn28nylf"]
+
+[ext_resource type="Script" uid="uid://b4s2jbky4u58k" path="res://character/ability_data.gd" id="1_shg7l"]
+[ext_resource type="Script" uid="uid://c2q3017bult3r" path="res://item/item_data.gd" id="2_2br7x"]
+[ext_resource type="Script" uid="uid://clsgej8m41el5" path="res://character/character.gd" id="3_42lwo"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_shg7l"]
+load_path = "res://.godot/imported/placeholder_portraits.jpeg-4b4375c88fdfacf15dac6cc70c8ca20d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_2br7x"]
+atlas = SubResource("CompressedTexture2D_shg7l")
+region = Rect2(1681, 661, 210, 330)
+
+[resource]
+script = ExtResource("3_42lwo")
+name = "Alice"
+portrait = SubResource("AtlasTexture_2br7x")
+health = 100
+speed = 8.0
+metadata/_custom_type_script = "uid://clsgej8m41el5"

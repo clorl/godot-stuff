@@ -1,0 +1,17 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://dnnuhyue8l4rb"]
+
+[ext_resource type="Script" uid="uid://b4s2jbky4u58k" path="res://character/ability_data.gd" id="1_motvp"]
+[ext_resource type="Script" uid="uid://c2q3017bult3r" path="res://item/item_data.gd" id="2_otc2v"]
+[ext_resource type="Script" uid="uid://clsgej8m41el5" path="res://character/character.gd" id="3_kjnge"]
+[ext_resource type="Texture2D" uid="uid://fla1hs4k8aeh" path="res://character/placeholder_portraits.jpeg" id="3_otc2v"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_kjnge"]
+atlas = ExtResource("3_otc2v")
+region = Rect2(211, 991, 210, 330)
+
+[resource]
+script = ExtResource("3_kjnge")
+name = "Dewey"
+portrait = SubResource("AtlasTexture_kjnge")
+speed = 8.0
+metadata/_custom_type_script = "uid://clsgej8m41el5"

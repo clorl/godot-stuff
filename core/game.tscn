@@ -1,0 +1,12 @@
+[gd_scene format=3 uid="uid://b8u4in8sx5phu"]
+
+[ext_resource type="Script" uid="uid://hjgyqbvkie3y" path="res://core/game.gd" id="1_d3un6"]
+[ext_resource type="Script" uid="uid://clsgej8m41el5" path="res://character/character.gd" id="2_8xnxh"]
+[ext_resource type="Resource" uid="uid://0xgagn28nylf" path="res://character/data/alice.tres" id="3_a04qp"]
+[ext_resource type="Resource" uid="uid://62vfma3dfdoc" path="res://character/data/bob.tres" id="4_cjuek"]
+[ext_resource type="Resource" uid="uid://df24rpbwa566c" path="res://character/data/cassie.tres" id="5_vhpdd"]
+[ext_resource type="Resource" uid="uid://dnnuhyue8l4rb" path="res://character/data/dewey.tres" id="6_gjr3k"]
+
+[node name="Game" type="Node" unique_id=868414498]
+script = ExtResource("1_d3un6")
+party = Array[ExtResource("2_8xnxh")]([ExtResource("3_a04qp"), ExtResource("4_cjuek"), ExtResource("5_vhpdd"), ExtResource("6_gjr3k")])

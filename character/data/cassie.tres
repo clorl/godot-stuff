@@ -1,0 +1,19 @@
+[gd_resource type="Resource" script_class="Character" format=3 uid="uid://df24rpbwa566c"]
+
+[ext_resource type="Script" uid="uid://b4s2jbky4u58k" path="res://character/ability_data.gd" id="1_21s5t"]
+[ext_resource type="Script" uid="uid://c2q3017bult3r" path="res://item/item_data.gd" id="2_yxpow"]
+[ext_resource type="Script" uid="uid://clsgej8m41el5" path="res://character/character.gd" id="3_7oqfk"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_21s5t"]
+load_path = "res://.godot/imported/placeholder_portraits.jpeg-4b4375c88fdfacf15dac6cc70c8ca20d.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yxpow"]
+atlas = SubResource("CompressedTexture2D_21s5t")
+region = Rect2(841, 1, 210, 330)
+
+[resource]
+script = ExtResource("3_7oqfk")
+name = "Cassie"
+portrait = SubResource("AtlasTexture_yxpow")
+speed = 8.0
+metadata/_custom_type_script = "uid://clsgej8m41el5"

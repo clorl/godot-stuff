@@ -1,46 +1,170 @@
-[gd_scene format=3 uid="uid://buaq673iyr04d"]
+[gd_scene format=3 uid="uid://dk651spavhf12"]
 
-[ext_resource type="Script" uid="uid://d4bxyuqas3wu4" path="res://core/network/players_spawner.gd" id="1_ig7tw"]
-[ext_resource type="Shader" uid="uid://ulngh2ungva8" path="res://prototype/grid.gdshader" id="2_0xm2m"]
+[ext_resource type="Script" uid="uid://d18p6ftbjyo4e" path="res://tactical_rpg.gd" id="1_lquwl"]
+[ext_resource type="PackedScene" uid="uid://cusecmqasjimh" path="res://character/character_entity.tscn" id="2_1bvp3"]
+[ext_resource type="Shader" uid="uid://ch882oq4od5ul" path="res://prototype/3d_grid_texture.gdshader" id="2_7mycd"]
+[ext_resource type="Script" uid="uid://cmv7j6ti888kl" path="res://core/camera_controller.gd" id="3_h2yge"]
+[ext_resource type="Script" uid="uid://bhm72rt20ksm5" path="res://character/party_hud.gd" id="4_lquwl"]
+[ext_resource type="PackedScene" uid="uid://dp7eaw1ryrd03" path="res://character/portrait_button.tscn" id="5_7mycd"]
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_0xm2m"]
-shader = ExtResource("2_0xm2m")
-shader_parameter/base = 2.0
-shader_parameter/color_bg = Color(0.63288, 0.5616, 0.72, 1)
-shader_parameter/color_grid_1 = Color(0.117260754, 0.08673177, 0.13252522, 1)
-shader_parameter/color_grid_2 = Color(0.021434635, 0.021434637, 0.021434627, 1)
-shader_parameter/floor_grid = false
-shader_parameter/grid_size = 6.0
-shader_parameter/grid_1_step = 0.033
-shader_parameter/grid_2_step = 2.0
-shader_parameter/line_width = 2.0
-shader_parameter/uv_offset = Vector2(0, 0)
-shader_parameter/uv_rotation = 0.0
-shader_parameter/uv_scale = 1.0
+[sub_resource type="NavigationMesh" id="NavigationMesh_7mycd"]
+vertices = PackedVector3Array(-99.5, 0.5, -99.5, -99.5, 0.5, 99.5, 99.5, 0.5, 99.5, 99.5, 0.5, -99.5)
+polygons = [PackedInt32Array(3, 2, 0), PackedInt32Array(0, 2, 1)]
+geometry_source_geometry_mode = 2
+geometry_source_group_name = &"navmesh"
 
-[sub_resource type="Curve2D" id="Curve2D_0xm2m"]
-_data = {
-"points": PackedVector2Array(0, 0, 0, 0, -207, -204, 0, 0, 0, 0, 201, -206, 0, 0, 0, 0, 192, 178, 0, 0, 0, 0, -197, 195)
-}
-point_count = 4
+[sub_resource type="PlaneMesh" id="PlaneMesh_uc2yw"]
+size = Vector2(200, 200)
 
-[node name="Main" type="Node2D" unique_id=43698321]
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_pubjl"]
+render_priority = 0
+shader = ExtResource("2_7mycd")
+shader_parameter/world_uv = false
+shader_parameter/object_uv = false
+shader_parameter/object_uv_scale = Vector2(1, 1)
+shader_parameter/preset_color = 0
+shader_parameter/base_color = Color(0.26566523, 0.2854969, 0.43423486, 1)
+shader_parameter/metalic = 0.25
+shader_parameter/roughness = 0.75
+shader_parameter/grid_scale = 1.0
+shader_parameter/grid_width = 0.01
+shader_parameter/grid_color = Color(0.8, 0.8, 0.8, 1)
+shader_parameter/inside_scale = 1.0
+shader_parameter/inside_width = 0.01
+shader_parameter/inside_color = Color(0.8, 0.8, 0.8, 0.8)
+shader_parameter/checkered = true
+shader_parameter/sub_checkered_grid = false
+shader_parameter/checkered_color = Color(0.25, 0.25, 0.25, 1)
+shader_parameter/checkered_blend_color = 0.1
+shader_parameter/use_inside_uv = false
+shader_parameter/use_albedo_color = false
+shader_parameter/albedo_alpha = 0.5
 
-[node name="Grid" type="ColorRect" parent="." unique_id=1968538245]
-material = SubResource("ShaderMaterial_0xm2m")
-offset_left = -1500.0
-offset_top = -1500.0
-offset_right = 1500.0
-offset_bottom = 1500.0
-metadata/_edit_lock_ = true
+[sub_resource type="BoxShape3D" id="BoxShape3D_1bvp3"]
+size = Vector3(200, 0.001, 200)
 
-[node name="PlayerSpawner" type="MultiplayerSpawner" parent="." unique_id=1553503622]
-_spawnable_scenes = PackedStringArray("uid://djr7txtv4mj7p")
-spawn_path = NodePath(".")
-script = ExtResource("1_ig7tw")
-spawn_data = Dictionary[String, Variant]({
-"spawn_points": SubResource("Curve2D_0xm2m")
-})
+[sub_resource type="TorusMesh" id="TorusMesh_o1vrm"]
+inner_radius = 2.619
+outer_radius = 7.648
 
-[node name="SpawnPositions" type="Path2D" parent="PlayerSpawner" unique_id=915555506]
-curve = SubResource("Curve2D_0xm2m")
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_1bvp3"]
+points = PackedVector3Array(-3.6691713, -0.39575624, -6.6612267, 0, 0.76316684, -2.4282217, -2.4283166, 0.76316684, 0.48558712, 0, -2.3927703, -3.6419048, -6.869695, -1.8017486, 0.26178724, -6.041463, 2.19164, -1.9167721, -0.29336727, 2.0548253, -6.5597734, -4.3699055, 2.7055635, 0.48558712, -0.31527618, -2.1957498, -6.318491, -3.6420949, -2.3927703, 0.48558712, -5.7668753, -1.8473845, -3.6419048, -6.1790385, 1.0775706, -4.057799, -7.520325, 0.716469, 0.22094868, 0, 2.2198336, -3.4002995, -3.0232258, 2.1882195, -5.5800495, -0.2358171, 0.718954, -7.5188413, -4.0982904, -2.3239112, -4.4990005, -6.8873763, -0.3933707, -3.2135746, -2.671681, -1.4218334, 0.48558712, -0.35681674, 2.460252, -5.6261654, -3.4615116, 1.3053058, -6.3946915, -5.8687935, -2.3903823, 0.106155954, -1.9394568, -1.47801, -6.884214, -4.9368, -1.017722, -5.5370073, -4.742307, 2.395106, -3.4283848, 0, -0.6935, -2.4282217, -6.571177, 2.0506132, 0.1659275, -7.114828, 1.1115572, -1.9190876, -7.418939, -0.62779343, -1.4335234, -0.27988476, -0.8661494, -7.472019, -5.1362286, 0.6607209, -5.5195265, -2.9135237, 1.7341038, 0.48558712)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_lquwl"]
+points = PackedVector3Array(-1.6799303, -0.18503036, 7.435195, -7.5169864, -0.64617616, 0.7229116, -7.4956284, 0.7118386, 0.7429331, 0, 0.76316684, 2.4289823, -0.36962715, -2.381778, 4.34653, -0.3733421, 2.448891, 5.6628, -5.8564525, -2.375298, 0.8416273, -4.905838, -0.5782905, 5.7620325, -5.6345253, 2.4417877, 0.84595937, -4.4980593, 1.6730546, 5.3559732, -3.0082154, -1.4987543, 0.8413595, -0.33772156, -2.1817234, 6.343624, -5.1313295, -2.0431426, 4.1278486, 0, 2.2198336, 3.3999667, -0.26703185, 0.7131016, 7.5190787, -3.0254397, 1.5382835, 0.90594447, -6.613392, 0.8742765, 3.4985437, -6.8508725, -1.0242597, 2.8567379, -2.841934, -1.6344888, 6.42236, -4.7387533, 2.3853252, 3.4872446, -2.631112, 1.4974871, 6.634571, -2.586018, -2.346702, 5.425978, -6.4270935, 1.7302337, 2.644612, -4.2988873, 0.65656304, 6.1994014, -4.09901, -2.3318582, 0.9008575, -0.4161792, -1.6990018, 3.2608886, -0.3066934, -1.3068309, 7.2573333, -1.9561241, 2.1775866, 6.0552692, -6.8560395, -1.7933469, 0.69950694, -4.313607, 2.3956797, 0.9088278, -5.958589, 0.24164583, 4.749078, -6.801992, 1.8297597, 0.7618676)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_7mycd"]
+points = PackedVector3Array(7.5189548, 0.716212, -0.25044218, 0.2969201, -0.8618917, -7.4724765, 0.2504463, 0.71621126, -7.5189505, 2.4283166, 0.76316684, 0, 5.866295, -2.3873284, -0.36155382, 5.747213, -0.5860183, -4.9187083, 4.740595, 2.3903933, -3.4567502, 0.3800337, -2.3746235, -4.3224382, 0, 2.2198336, -3.3994913, 5.6439414, 2.4547398, -0.36483452, 3.453808, -2.3369203, -4.961924, 2.386068, 1.9621649, -6.2399764, 6.1594124, 1.2757705, -3.8846984, 3.671336, -0.39143172, -6.6604176, 3.674121, -2.0723016, -0.5128201, 6.8924785, -1.2542752, -2.381145, 0, 0.76316684, -2.4283166, 0.36483535, 2.4547393, -5.643941, 3.3994913, 2.2198336, 0, 0.20880482, -1.8026636, -6.871182, 4.0910935, 1.0705005, -6.163482, 6.871184, -1.8026646, -0.20880288, 5.1386743, -2.0553854, -4.092931, 3.2543921, -1.4367868, -6.4065824, 0.5000449, -1.445704, -3.0385349, 7.140126, 0.46824157, -2.582391, 6.696296, 1.7647282, -1.7221394, 2.582393, 0.46824095, -7.1401215, 0.3615501, -2.387331, -5.866297, 3.8846984, 2.1322324, -5.142982, 7.4617534, -0.8592115, -0.53173447, 4.3224387, -2.3746247, -0.38003185)
+
+[sub_resource type="ConvexPolygonShape3D" id="ConvexPolygonShape3D_272bh"]
+points = PackedVector3Array(4.0954967, 0.24583884, 6.4228954, 0.55779344, -0.58892053, 2.6374345, 4.5396166, 2.4405956, 0.3854078, 6.871182, -1.8026636, 0.20880482, 0.36155382, -2.3873284, 5.866295, 0.36483452, 2.4547398, 5.6439414, 6.435119, 1.7355857, 2.609155, 0, 1.7341038, 2.9135237, 5.734194, -1.6089034, 4.0894113, 0.25044218, 0.716212, 7.5189548, 4.3224382, -2.3746235, 0.3800337, 2.4283166, 0.76316684, 0, 7.5189505, 0.71621126, 0.2504463, 3.8846984, 2.132236, 5.142984, 1.9528797, -1.4675708, 6.8896747, 6.872825, -0.39129555, 3.2448153, 4.524331, -2.3147795, 4.0974636, 0.5128201, -2.0723016, 3.674121, 3.3994913, 2.2198336, 0, 5.643941, 2.4547393, 0.36483535, 5.7298365, 0.64989275, 4.9090614, 2.6193488, 1.5112122, 6.6268396, 4.713396, -1.0014851, 5.750567, 0, 0.76316684, 2.4283166, 0.20880288, -1.8026646, 6.871184, 0, 2.2198336, 3.3994913, 1.6634969, -0.18666913, 7.4391775, 5.8504944, -2.368015, 1.0451396, 4.7405944, 2.3903918, 3.4567504, 3.0385349, -1.445704, 0.5000449, 3.037781, -2.0821695, 5.7900968, 7.145408, -1.052084, 1.9277276)
+
+[node name="Main" type="Node3D" unique_id=2037031823]
+script = ExtResource("1_lquwl")
+character_entity_scene = ExtResource("2_1bvp3")
+ground_layer = 2
+
+[node name="NavigationRegion3D2" type="NavigationRegion3D" parent="." unique_id=9742231]
+navigation_mesh = SubResource("NavigationMesh_7mycd")
+
+[node name="NavigationObstacle3D" type="NavigationObstacle3D" parent="NavigationRegion3D2" unique_id=1396486357]
+radius = 1.0
+height = 4.0
+vertices = PackedVector3Array(-9.818297, 0, -9.446628, -4.7388, 0, -10.68553, 1.8273792, 0, -6.906879, 3.1901722, 0, 1.2698739, -2.3848858, 0, 6.349372, -10.375804, 0, 4.8007445, -13.535004, 0, -0.8362583, -12.481937, 0, -6.5971537)
+affect_navigation_mesh = true
+carve_navigation_mesh = true
+avoidance_enabled = false
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="." unique_id=922242748 groups=["navmesh"]]
+mesh = SubResource("PlaneMesh_uc2yw")
+surface_material_override/0 = SubResource("ShaderMaterial_pubjl")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D" unique_id=330568966]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" unique_id=630051377]
+shape = SubResource("BoxShape3D_1bvp3")
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="MeshInstance3D" unique_id=1022820418]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -3.3734722, 0)
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D2" unique_id=736744858]
+shape = SubResource("BoxShape3D_1bvp3")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="." unique_id=1200405836]
+transform = Transform3D(0.18168662, -0.18970665, -0.9648843, -0.15643449, 0.96314377, -0.2188209, 0.97083384, 0.19069797, 0.14531368, -5.2812414, -1.9073486e-06, -1.9089947)
+mesh = SubResource("TorusMesh_o1vrm")
+skeleton = NodePath("")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D2" unique_id=404935363]
+collision_layer = 2
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=621245781]
+shape = SubResource("ConvexPolygonShape3D_1bvp3")
+
+[node name="CollisionShape3D2" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=192970628]
+shape = SubResource("ConvexPolygonShape3D_lquwl")
+
+[node name="CollisionShape3D3" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=125843961]
+shape = SubResource("ConvexPolygonShape3D_7mycd")
+
+[node name="CollisionShape3D4" type="CollisionShape3D" parent="MeshInstance3D2/StaticBody3D" unique_id=916951708]
+shape = SubResource("ConvexPolygonShape3D_272bh")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="." unique_id=1447396819]
+transform = Transform3D(0.70710677, -0.49999997, 0.49999997, 0, 0.7071068, 0.7071068, -0.7071068, -0.5, 0.5, 0, 0, 0)
+
+[node name="HudLayer" type="CanvasLayer" parent="." unique_id=2055043258]
+
+[node name="HUD" type="Control" parent="HudLayer" unique_id=1362683197]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+
+[node name="PartyHud" type="Control" parent="HudLayer/HUD" unique_id=1844250507 node_paths=PackedStringArray("container")]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+script = ExtResource("4_lquwl")
+character_button_scene = ExtResource("5_7mycd")
+container = NodePath("HBoxContainer")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HudLayer/HUD/PartyHud" unique_id=842351661]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -183.0
+offset_right = 476.0
+grow_vertical = 0
+
+[node name="Spawn" type="Marker3D" parent="." unique_id=678040292 groups=["party_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.544656, 0, 0)
+
+[node name="Spawn2" type="Marker3D" parent="." unique_id=1021076392 groups=["party_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 15.643541, 0, 0)
+
+[node name="Spawn3" type="Marker3D" parent="." unique_id=106952828 groups=["party_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 24.14588, 0, 0)
+
+[node name="Spawn4" type="Marker3D" parent="." unique_id=1896437403 groups=["party_spawn"]]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.850473, 0, 0)
+
+[node name="CameraController" type="Node3D" parent="." unique_id=787696712]
+transform = Transform3D(0.70710677, -0.61237246, 0.35355335, 0, 0.49999997, 0.86602545, -0.70710677, -0.61237246, 0.35355335, 0, 0, 0)
+script = ExtResource("3_h2yge")
+
+[node name="Camera3D" type="Camera3D" parent="CameraController" unique_id=463151056]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 10)

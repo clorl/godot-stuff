@@ -1,0 +1,31 @@
+[gd_scene format=3 uid="uid://dp7eaw1ryrd03"]
+
+[ext_resource type="Texture2D" uid="uid://b0nolecm8lxod" path="res://character/data/portraits.tres" id="1_lkxrc"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n16k7"]
+content_margin_left = 4.0
+content_margin_top = 4.0
+content_margin_right = 4.0
+content_margin_bottom = 4.0
+bg_color = Color(0.1, 0.1, 0.1, 0.6)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(1, 0.62201726, 0, 1)
+border_blend = true
+corner_radius_top_left = 3
+corner_radius_top_right = 3
+corner_radius_bottom_right = 3
+corner_radius_bottom_left = 3
+corner_detail = 5
+shadow_color = Color(1, 0.64954114, 0, 0.6)
+
+[node name="PortraitButton" type="Button" unique_id=629972351]
+custom_minimum_size = Vector2(120, 0)
+offset_right = 120.0
+offset_bottom = 193.0
+icon = ExtResource("1_lkxrc")
+vertical_icon_alignment = 2
+expand_icon = true
+metadata/selected_style = SubResource("StyleBoxFlat_n16k7")

@@ -1,0 +1,147 @@
+[gd_scene format=3 uid="uid://cusecmqasjimh"]
+
+[ext_resource type="PackedScene" uid="uid://dc0qixn6g4g8e" path="res://entities/entity_3d.tscn" id="1_denv7"]
+[ext_resource type="Script" uid="uid://d36hn8rlrqajf" path="res://character/character_entity.gd" id="2_emxql"]
+[ext_resource type="PackedScene" uid="uid://b4gtyjegp6228" path="res://character/ual/AnimationLibrary_Godot_Standard.glb" id="3_873af"]
+[ext_resource type="Shader" uid="uid://chx26juofbmx" path="res://visuals/outline.gdshader" id="4_kggft"]
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_873af"]
+radius = 0.7952286
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_kggft"]
+render_priority = 0
+shader = ExtResource("4_kggft")
+shader_parameter/outline_color = Color(1, 0, 0.9201813, 1)
+shader_parameter/outline_width_px = 2.0
+shader_parameter/visible = true
+
+[sub_resource type="AnimationNodeBlend3" id="AnimationNodeBlend3_kggft"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gqdb2"]
+animation = &"Idle"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_boj8w"]
+animation = &"Sprint"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_kggft"]
+animation = &"Walk"
+
+[sub_resource type="AnimationNodeBlendTree" id="AnimationNodeBlendTree_kggft"]
+graph_offset = Vector2(-296.13165, 385.76996)
+nodes/output/position = Vector2(400, 320)
+nodes/Idle/node = SubResource("AnimationNodeAnimation_gqdb2")
+nodes/Idle/position = Vector2(-20, 160)
+nodes/Walk/node = SubResource("AnimationNodeAnimation_kggft")
+nodes/Walk/position = Vector2(-20, 320)
+nodes/Run/node = SubResource("AnimationNodeAnimation_boj8w")
+nodes/Run/position = Vector2(-20, 480)
+nodes/Blend/node = SubResource("AnimationNodeBlend3_kggft")
+nodes/Blend/position = Vector2(220, 320)
+node_connections = [&"output", 0, &"Blend", &"Blend", 0, &"Idle", &"Blend", 1, &"Walk", &"Blend", 2, &"Run"]
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_kggft"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_boj8w"]
+states/IdleWalk/node = SubResource("AnimationNodeBlendTree_kggft")
+states/IdleWalk/position = Vector2(339.5, 114.5)
+transitions = ["Start", "IdleWalk", SubResource("AnimationNodeStateMachineTransition_kggft")]
+
+[node name="CharacterEntity" unique_id=1295524432 instance=ExtResource("1_denv7")]
+script = ExtResource("2_emxql")
+character = null
+acceleration_duration = 2.0
+acceleration_easing = 10.196471
+deceleration_duration = 1.0
+deceleration_easing = 0.16493855
+selected_outline_color = Color(1, 0.45980132, 0, 1)
+hover_outline_color = Color(0, 0.45532417, 1, 1)
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SelectionArea" parent_id_path=PackedInt32Array(697976714) index="0" unique_id=1520515789]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1, 0)
+shape = SubResource("SphereShape3D_873af")
+
+[node name="Model" parent="." index="2" unique_id=1895794810 instance=ExtResource("3_873af")]
+
+[node name="Rig" parent="Model" index="0" unique_id=778923606]
+transform = Transform3D(-1, 0, -8.742278e-08, 0, 1, 0, 8.742278e-08, 0, -1, 0, 0, 0)
+
+[node name="GeneralSkeleton" parent="Model/Rig" index="0" unique_id=1631222840]
+bones/1/position = Vector3(0.0015806133, 0.8688569, -0.087993346)
+bones/1/rotation = Quaternion(-0.034944538, -0.115942635, -0.004081642, 0.9926326)
+bones/3/rotation = Quaternion(0.046589326, 0.00010873319, 0.00013012403, 0.9989141)
+bones/4/rotation = Quaternion(0.13937484, 0.0003253068, 0.00038928638, 0.9902397)
+bones/5/rotation = Quaternion(-0.09308386, -0.00021726242, -0.0002600073, 0.9956582)
+bones/6/rotation = Quaternion(0.043186884, 0.09540109, 0.011149848, 0.9944391)
+bones/7/rotation = Quaternion(0.5032764, 0.52109444, 0.53121394, -0.439301)
+bones/8/rotation = Quaternion(-0.012380514, 0.82577527, -0.5637808, 0.0096566025)
+bones/9/rotation = Quaternion(0.15783277, -0.6888245, 0.16898492, 0.6870617)
+bones/10/rotation = Quaternion(0.09913024, 0.70686626, 0.0629003, 0.69753635)
+bones/11/rotation = Quaternion(0.6295969, -4.0978193e-08, -4.61936e-06, 0.77692205)
+bones/12/rotation = Quaternion(0.62334186, 2.9802322e-08, -4.261732e-06, 0.78194946)
+bones/13/rotation = Quaternion(0.62334144, -2.2351742e-07, -4.4703484e-06, 0.78194976)
+bones/14/rotation = Quaternion(0.6288943, -0.0297349, -4.470348e-06, 0.7769219)
+bones/15/rotation = Quaternion(0.6227327, -0.02755458, -4.410744e-06, 0.7819494)
+bones/16/rotation = Quaternion(0.6226684, -0.028961532, -4.4703493e-06, 0.78194976)
+bones/17/rotation = Quaternion(0.6630008, -0.044529784, 0.07369417, 0.7436506)
+bones/18/rotation = Quaternion(0.6203661, -0.06229401, 0.015573084, 0.7816796)
+bones/19/rotation = Quaternion(0.62192154, -0.04205184, -4.4703484e-06, 0.78194964)
+bones/20/rotation = Quaternion(0.6291978, -0.022414071, -4.202128e-06, 0.77692205)
+bones/21/rotation = Quaternion(0.6229472, -0.022176376, -4.321337e-06, 0.78194946)
+bones/22/rotation = Quaternion(0.6228982, -0.023505477, -4.5001498e-06, 0.7819497)
+bones/23/rotation = Quaternion(-0.123819165, 0.7195233, 0.2018354, 0.65285325)
+bones/24/rotation = Quaternion(0.18180694, 0.11012423, 0.060063303, 0.9753006)
+bones/25/rotation = Quaternion(0.5994299, 0.27396563, 0.19463211, 0.7264606)
+bones/26/rotation = Quaternion(0.5552175, -0.47087693, -0.47768772, -0.4917549)
+bones/27/rotation = Quaternion(0.063234754, 0.8203531, -0.5682672, -0.009733383)
+bones/28/rotation = Quaternion(0.28768075, 0.5580271, -0.2109723, 0.7492237)
+bones/29/rotation = Quaternion(0.12024976, -0.69903094, -0.056890074, 0.702609)
+bones/30/rotation = Quaternion(0.6295971, 3.7252903e-08, 4.172325e-06, 0.7769218)
+bones/31/rotation = Quaternion(0.62334144, 1.825392e-07, 4.470348e-06, 0.7819497)
+bones/32/rotation = Quaternion(0.62334156, 1.00582824e-07, 4.2319293e-06, 0.78194964)
+bones/33/rotation = Quaternion(0.6288947, 0.029734796, 4.351139e-06, 0.77692175)
+bones/34/rotation = Quaternion(0.62273216, 0.027554482, 4.5001507e-06, 0.78194976)
+bones/35/rotation = Quaternion(0.62266874, 0.028961398, 4.3213377e-06, 0.78194946)
+bones/36/rotation = Quaternion(0.6630007, 0.044529956, -0.07369393, 0.7436508)
+bones/37/rotation = Quaternion(0.62036633, 0.06229363, -0.015572906, 0.7816794)
+bones/38/rotation = Quaternion(0.62192184, 0.04205143, 4.4703484e-06, 0.7819494)
+bones/39/rotation = Quaternion(0.6291981, 0.022413792, 4.11272e-06, 0.7769218)
+bones/40/rotation = Quaternion(0.62294656, 0.022176204, 4.470349e-06, 0.7819501)
+bones/41/rotation = Quaternion(0.6228987, 0.02350526, 4.1723247e-06, 0.7819493)
+bones/42/rotation = Quaternion(-0.12381923, -0.7195234, -0.2018356, 0.6528533)
+bones/43/rotation = Quaternion(0.18180703, -0.11012423, -0.060063303, 0.97530067)
+bones/44/rotation = Quaternion(0.5994302, -0.2739653, -0.19463223, 0.7264605)
+bones/45/rotation = Quaternion(-0.0008386074, 0.15905209, 0.979963, -0.11989332)
+bones/46/rotation = Quaternion(0.021468755, 0.9739547, -0.19729458, 0.1096643)
+bones/47/rotation = Quaternion(-0.09653293, 0.7138474, -0.69358146, 0.006936171)
+bones/48/rotation = Quaternion(4.2923723e-08, 1, 5.9604645e-08, 2.568838e-08)
+bones/49/rotation = Quaternion(0.00097550073, -0.0711356, 0.9876678, 0.13946737)
+bones/50/rotation = Quaternion(-0.054584455, 0.9222989, -0.1497114, -0.35209644)
+bones/51/rotation = Quaternion(0.17059164, 0.61845446, -0.7670744, 0.0030816277)
+bones/52/rotation = Quaternion(-8.1927055e-08, 1, 2.9802322e-08, -8.602239e-09)
+
+[node name="Mannequin" parent="Model/Rig/GeneralSkeleton" index="0" unique_id=259054025]
+material_overlay = SubResource("ShaderMaterial_kggft")
+
+[node name="Outline" parent="." index="3" unique_id=230409296 node_paths=PackedStringArray("targets")]
+shader = SubResource("ShaderMaterial_kggft")
+targets = [NodePath("../Model/Rig/GeneralSkeleton/Mannequin")]
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="." index="4" unique_id=891789799]
+path_desired_distance = 3.0
+path_max_distance = 10.01
+avoidance_enabled = true
+radius = 3.0
+debug_enabled = true
+
+[node name="AnimationTree" type="AnimationTree" parent="." index="5" unique_id=206863588]
+root_node = NodePath("../Model")
+tree_root = SubResource("AnimationNodeStateMachine_boj8w")
+anim_player = NodePath("../Model/AnimationPlayer")
+parameters/IdleWalk/Blend/blend_amount = -1.0
+
+[node name="Marker3D" type="Marker3D" parent="." index="6" unique_id=163485783]
+
+[connection signal="input_event" from="SelectionArea" to="." method="_on_selection_area_input_event"]
+
+[editable path="Model"]
